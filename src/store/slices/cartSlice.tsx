@@ -53,7 +53,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart: (state, action: { payload: { id: any } }) => {
+    addToCart: (state, action: { payload: ProductType }) => {
       toast.success("your product was added successfully");
       const itemInCart = state.cart.find(
         (item) => item.id === action.payload.id
@@ -81,7 +81,7 @@ const cartSlice = createSlice({
           totalQuantity: 0,
         }
       );
-      state.totalPrice = parseInt(totalPrice);
+      state.totalPrice = totalPrice;
       state.totalQuantity = totalQuantity;
     },
     removeFromCart: (state: InitialStateTypes, action: { payload: any }) => {
@@ -116,7 +116,7 @@ const cartSlice = createSlice({
       const findProduct = state.items.find(
         (item) => item.id === action.payload.id
       );
-      state.singleProduct = findProduct;
+      state.singleProduct = findProduct!;
     },
     filterCategory: (state: InitialStateTypes, action: { payload: string }) => {
       const result =
@@ -181,8 +181,6 @@ export const {
   increaseItemQuantity,
   decreaseItemQuantity,
   productDetail,
-  productIncrease,
-  productDecrease,
   filterCategory,
   sortProducts,
 } = cartSlice.actions;
